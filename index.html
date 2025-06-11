@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixeldraft</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="Resources\Pixeldraftlogo_Clear.png">
+    <title>Autoplay Carousel</title>
+
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="nav">
+                <li><a href="index.html"><strong>Home</strong></a></li>
+                <li><a href="page2.html">Services &amp; Solutions</a></li>
+                <li><a href="page3.html">Resources</a></li>
+                <li><a href="page4.html">Documentation</a></li>
+                <li><a href="page5.html">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Welcome to</h1>
+        <img style="margin-top:-20px" src="Resources\Pixeldraftlogo_Clear.png" height="250" />
+        <p>Programming Architectural Solutions Since 2024</p>
+
+
+
+
+
+
+
+    </main>
+    <div class="carousel" style="align-content:center">
+        <div class="carousel-track" id="carouselTrack">
+            <div class="carousel-slide">
+                <img src="Resources\Revit_RFA.PNG" style="height:auto; width:auto"/>
+            </div>
+            <div class="carousel-slide">
+                <img src="Resources\VisualStudio_Code.PNG" style="height:auto; width:auto" />
+            </div>
+            <div class="carousel-slide">
+                <img src="Resources\Unity_Scene.PNG" style="height:auto; width:auto" />
+            </div>
+        </div>
+        <div class="carousel-buttons">
+            <button class="carousel-button" id="prevBtn">&#10094;</button>
+            <button class="carousel-button" id="nextBtn">&#10095;</button>
+        </div>
+    </div>
+    <div>
+        <!-- below carousel-->
+    </div>
+    <script>
+        const track = document.getElementById('carouselTrack');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const slides = document.querySelectorAll('.carousel-slide');
+        let index = 0;
+
+        function updateCarousel() {
+            const slideWidth = slides[0].offsetWidth;
+            track.style.transform = `translateX(-${index * slideWidth}px)`;
+        }
+
+        function nextSlide() {
+            index = (index + 1) % slides.length;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            index = (index - 1 + slides.length) % slides.length;
+            updateCarousel();
+        }
+
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+            resetAutoplay();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+            resetAutoplay();
+        });
+
+        window.addEventListener('resize', updateCarousel);
+
+        // Autoplay logic
+        let autoplay = setInterval(nextSlide, 3000); // change every 3 seconds
+
+        function resetAutoplay() {
+            clearInterval(autoplay);
+            autoplay = setInterval(nextSlide, 3000);
+        }
+    </script>
+    <footer>
+        <p>&copy; 2024 Pixeldraft</p>
+    </footer>
+</body>
+</html>
